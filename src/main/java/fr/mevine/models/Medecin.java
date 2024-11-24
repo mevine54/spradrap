@@ -1,6 +1,7 @@
 package fr.mevine.models;
 
 public class Medecin extends Utilisateur {
+    Integer medId;
     private String numeroAgrement;
 
     // Constructeurs
@@ -13,6 +14,13 @@ public class Medecin extends Utilisateur {
     }
 
     // Getters et Setters
+    public  Integer getMedId() {
+        return medId;
+    }
+
+    public  void setMedId() {
+        this.medId = medId;
+    }
     public String getNumeroAgrement() {
         return numeroAgrement;
     }

@@ -2,28 +2,25 @@ package fr.mevine.models;
 
 import java.time.LocalDate;
 
-public class Client {
-    private Integer cliId;
+public class Client extends Utilisateur {
     private String numSecuSocial;
     private LocalDate dateNaissance;
     private Mutuelle mutuelle;
 
     // Constructeurs
-    public Client(Integer cliId, String numSecuSocial, LocalDate dateNaissance) {
-        this.cliId = cliId;
+    public Client() {
+        super();
+    }
+
+    public Client(Integer cliId, String nom, String prenom, Adresse adresse, String telephone, String email,
+                  String numSecuSocial, LocalDate dateNaissance, Mutuelle mutuelle) {
+        super(cliId, nom, prenom, adresse, telephone, email); // Appel au constructeur parent
         this.numSecuSocial = numSecuSocial;
         this.dateNaissance = dateNaissance;
+        this.mutuelle = mutuelle;
     }
 
     // Getters et Setters
-    public int getCliId() {
-        return cliId;
-    }
-
-    public void setCliId(Integer cliId) {
-        this.cliId = cliId;
-    }
-
     public String getNumSecuSocial() {
         return numSecuSocial;
     }
@@ -47,7 +44,11 @@ public class Client {
     public void setMutuelle(Mutuelle mutuelle) {
         this.mutuelle = mutuelle;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", Numéro de Sécurité Sociale : " + numSecuSocial +
+                ", Date de naissance : " + dateNaissance +
+                ", Mutuelle : " + (mutuelle != null ? mutuelle.getMutNom() : "Aucune");
+    }
 }
-
-
-

@@ -1,4 +1,4 @@
-package fr.mevine.utils;
+package fr.mevine.utilities;
 
 import java.io.IOException;
 import java.io.InputStream;

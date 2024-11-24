@@ -29,8 +29,8 @@ public class OrdonnanceDao extends BaseDao<Ordonnance> {
     protected void setInsertParameters(PreparedStatement pstmt, Ordonnance ordonnance) throws SQLException {
         pstmt.setDate(1, java.sql.Date.valueOf(ordonnance.getDate()));
         pstmt.setInt(2, ordonnance.getMedecin().getMedId());
-        pstmt.setInt(3, ordonnance.getClient().getId());
-        pstmt.setObject(4, ordonnance.getSpecialiste() != null ? ordonnance.getSpecialiste().getId() : null);
+        pstmt.setInt(3, ordonnance.getClient().getCliId());
+        pstmt.setObject(4, ordonnance.getSpecialiste() != null ? ordonnance.getSpecialiste().getTypeSpecialite() : null);
     }
 
     @Override
@@ -41,10 +41,10 @@ public class OrdonnanceDao extends BaseDao<Ordonnance> {
     @Override
     protected void setUpdateParameters(PreparedStatement pstmt, Ordonnance ordonnance) throws SQLException {
         pstmt.setDate(1, java.sql.Date.valueOf(ordonnance.getDate()));
-        pstmt.setInt(2, ordonnance.getMedecin().getId());
-        pstmt.setInt(3, ordonnance.getClient().getId());
-        pstmt.setObject(4, ordonnance.getSpecialiste() != null ? ordonnance.getSpecialiste().getId() : null);
-        pstmt.setInt(5, ordonnance.getId());
+        pstmt.setInt(2, ordonnance.getMedecin().getMedId());
+        pstmt.setInt(3, ordonnance.getClient().getCliId());
+        pstmt.setObject(4, ordonnance.getSpecialiste() != null ? ordonnance.getSpecialiste().getTypeSpecialite() : null);
+        pstmt.setInt(5, ordonnance.getOrdId());
     }
 
     @Override

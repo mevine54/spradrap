@@ -4,26 +4,27 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Ordonnance {
-    private Integer ordId;
-    private LocalDate date; // Utilisation uniforme de LocalDate
+    private Integer ordId; // Nom aligné avec la BDD
+    private LocalDate date;
     private Medecin medecin;
     private Client client;
+    private Specialiste specialiste;
     private List<Medicament> medicaments;
 
     // Constructeurs
     public Ordonnance() {
     }
 
-    public Ordonnance(Integer ordId, LocalDate date, Medecin medecin, Client client, List<Medicament> medicaments) {
+    public Ordonnance(Integer ordId, LocalDate date, Medecin medecin, Client client, Specialiste specialiste) {
         this.ordId = ordId;
         this.date = date;
         this.medecin = medecin;
         this.client = client;
-        this.medicaments = medicaments;
+        this.specialiste = specialiste;
     }
 
     // Getters et Setters
-    public int getOrdId() {
+    public Integer getOrdId() {
         return ordId;
     }
 
@@ -55,6 +56,14 @@ public class Ordonnance {
         this.client = client;
     }
 
+    public Specialiste getSpecialiste() {
+        return specialiste;
+    }
+
+    public void setSpecialiste(Specialiste specialiste) {
+        this.specialiste = specialiste;
+    }
+
     public List<Medicament> getMedicaments() {
         return medicaments;
     }
@@ -65,6 +74,10 @@ public class Ordonnance {
 
     @Override
     public String toString() {
-        return "Ordonnance ID : " + ordId + ", Client : " + client + ", Médecin : " + medecin;
+        return "Ordonnance ID : " + ordId +
+                ", Date : " + date +
+                ", Médecin : " + (medecin != null ? medecin.getUtiNom() : "N/A") +
+                ", Client : " + (client != null ? client.getUtiNom() : "N/A") +
+                ", Spécialiste : " + (specialiste != null ? specialiste.getTypeSpecialite() : "N/A");
     }
 }

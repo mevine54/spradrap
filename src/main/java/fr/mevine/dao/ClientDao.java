@@ -22,7 +22,7 @@ public class ClientDao extends BaseDao<Client> {
     protected void setInsertParameters(PreparedStatement pstmt, Client client) throws SQLException {
         pstmt.setString(1, client.getNumSecuSocial());
         pstmt.setDate(2, java.sql.Date.valueOf(client.getDateNaissance()));
-        pstmt.setInt(3, client.getMutuelle().getId());
+        pstmt.setInt(3, client.getMutuelle().getMutId());
     }
 
     @Override
@@ -34,8 +34,8 @@ public class ClientDao extends BaseDao<Client> {
     protected void setUpdateParameters(PreparedStatement pstmt, Client client) throws SQLException {
         pstmt.setString(1, client.getNumSecuSocial());
         pstmt.setDate(2, java.sql.Date.valueOf(client.getDateNaissance()));
-        pstmt.setInt(3, client.getMutuelle().getId());
-        pstmt.setInt(4, client.getCliId());
+        pstmt.setInt(3, client.getMutuelle().getMutId());
+        pstmt.setInt(4, client.getUtiId());
     }
 
     @Override

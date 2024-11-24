@@ -19,8 +19,8 @@ public class MedicamentDao extends BaseDao<Medicament> {
 
     @Override
     protected void setInsertParameters(PreparedStatement pstmt, Medicament medicament) throws SQLException {
-        pstmt.setString(1, medicament.getNom());
-        pstmt.setDouble(2, medicament.getPrix());
+        pstmt.setString(1, medicament.getMediNom());
+        pstmt.setDouble(2, medicament.getMediPrix());
         pstmt.setInt(3, medicament.getMediId());
     }
 
@@ -31,8 +31,8 @@ public class MedicamentDao extends BaseDao<Medicament> {
 
     @Override
     protected void setUpdateParameters(PreparedStatement pstmt, Medicament medicament) throws SQLException {
-        pstmt.setString(1, medicament.getNom());
-        pstmt.setDouble(2, medicament.getPrix());
+        pstmt.setString(1, medicament.getMediNom());
+        pstmt.setDouble(2, medicament.getMediPrix());
         pstmt.setInt(3, medicament.getMediId());
         pstmt.setInt(4, medicament.getMediId());
     }

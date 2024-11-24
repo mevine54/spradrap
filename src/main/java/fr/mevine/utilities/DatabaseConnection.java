@@ -1,4 +1,4 @@
-package fr.mevine.utils;
+package fr.mevine.utilities;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class DashboardView extends JFrame {
+public class DashboardView1 extends JFrame {
 
     private JPanel panelCentral;
     private DefaultTableModel tableModel; // Modèle de table pour l'historique
@@ -34,7 +34,7 @@ public class DashboardView extends JFrame {
         listeClients.remove(client);  // Supprime le client de la liste globale
     }
 
-    public DashboardView() {
+    public DashboardView1() {
         // Paramètres de base de la fenêtre
         setTitle("Pharmacie Sparadrap - Dashboard");
         setSize(800, 600);
@@ -616,6 +616,6 @@ public class DashboardView extends JFrame {
 
     // Méthode principale
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(DashboardView::new);
+        SwingUtilities.invokeLater(DashboardView1::new);
     }
 }

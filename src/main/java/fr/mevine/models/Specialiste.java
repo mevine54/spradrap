@@ -9,8 +9,8 @@ public class Specialiste extends Medecin {
     public Specialiste() {
     }
 
-    public Specialiste(Integer id, String nom, String prenom, Adresse adresse, String telephone, String email, String numeroAgrement, TypeSpecialite typeSpecialite) {
-        super(id, nom, prenom, telephone, email, adresse, numeroAgrement);
+    public Specialiste(Integer speId, String nom, String prenom, Adresse adresse, String telephone, String email, String numeroAgrement, TypeSpecialite typeSpecialite) {
+        super(speId, nom, prenom, telephone, email, adresse, numeroAgrement);
         this.typeSpecialite = typeSpecialite;
     }
 

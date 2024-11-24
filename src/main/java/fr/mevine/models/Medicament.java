@@ -3,21 +3,21 @@ package fr.mevine.models;
 import fr.mevine.enums.TypeMedicament;
 
 public class Medicament {
-    private int mediId;
-    private String nom;
+    private Integer mediId;
+    private String mediNom;
     private TypeMedicament typeMedicament;
-    private double prix;
+    private double mediPrix;
     private int stock;
 
     // Constructeurs
     public Medicament() {
     }
 
-    public Medicament(int mediId, String nom, TypeMedicament typeMedicament, double prix, int stock) {
+    public Medicament(Integer mediId, String mediNom, TypeMedicament typeMedicament, double mediPrix, int stock) {
         this.mediId = mediId;
-        this.nom = nom;
+        this.mediNom = mediNom;
         this.typeMedicament = typeMedicament;
-        this.prix = prix;
+        this.mediPrix = mediPrix;
         this.stock = stock;
     }
 
@@ -30,15 +30,15 @@ public class Medicament {
         this.mediId = id;
     }
 
-    public String getNom() {
-        return nom;
+    public String getMediNom() {
+        return mediNom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setMediNom(String mediNom) {
+        this.mediNom = mediNom;
     }
 
-    public TypeMedicament getCategorie() {
+    public TypeMedicament getTypeMedicament() {
         return typeMedicament;
     }
 
@@ -46,12 +46,12 @@ public class Medicament {
         this.typeMedicament = categorie;
     }
 
-    public double getPrix() {
-        return prix;
+    public double getMediPrix() {
+        return mediPrix;
     }
 
-    public void setPrix(double prix) {
-        this.prix = prix;
+    public void setMediPrix(double mediPrix) {
+        this.mediPrix = mediPrix;
     }
 
     public int getStock() {
@@ -64,7 +64,7 @@ public class Medicament {
 
     @Override
     public String toString() {
-        return nom + " (" + typeMedicament + "), Prix : " + prix + " €, Stock : " + stock;
+        return mediNom + " (" + typeMedicament + "), Prix : " + mediPrix + " €, Stock : " + stock;
     }
 }
 
