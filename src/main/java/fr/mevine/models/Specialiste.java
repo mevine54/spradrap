@@ -2,16 +2,15 @@ package fr.mevine.models;
 
 import fr.mevine.enums.TypeSpecialite;
 
-public class Specialiste extends Utilisateur {
+public class Specialiste extends Medecin {
     private TypeSpecialite typeSpecialite;
 
     // Constructeurs
     public Specialiste() {
     }
 
-    public Specialiste(Integer speId, String nom, String prenom, String telephone, String email, Adresse adresse,
-                       TypeSpecialite typeSpecialite) {
-        super(speId, nom, prenom, adresse, telephone, email);
+    public Specialiste(Integer id, String nom, String prenom, Adresse adresse, String telephone, String email, String numeroAgrement, TypeSpecialite typeSpecialite) {
+        super(id, nom, prenom, telephone, email, adresse, numeroAgrement);
         this.typeSpecialite = typeSpecialite;
     }
 
@@ -20,7 +19,7 @@ public class Specialiste extends Utilisateur {
         return typeSpecialite;
     }
 
-    public void setSpecialite(TypeSpecialite typeSpecialite) {
+    public void setTypeSpecialite(TypeSpecialite typeSpecialite) {
         this.typeSpecialite = typeSpecialite;
     }
 
@@ -29,4 +28,3 @@ public class Specialiste extends Utilisateur {
         return super.toString() + ", Spécialité : " + typeSpecialite;
     }
 }
-

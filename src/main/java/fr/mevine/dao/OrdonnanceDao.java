@@ -1,11 +1,19 @@
 package fr.mevine.dao;
 
 import fr.mevine.models.Ordonnance;
+import fr.mevine.models.Client;
+import fr.mevine.models.Medecin;
+import fr.mevine.models.Specialiste;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class OrdonnanceDao extends BaseDao<Ordonnance> {
+
+    private final MedecinDao medecinDao = new MedecinDao();
+    private final ClientDao clientDao = new ClientDao();
+    private final SpecialisteDao specialisteDao = new SpecialisteDao();
 
     @Override
     protected String getTableName() {
@@ -20,9 +28,9 @@ public class OrdonnanceDao extends BaseDao<Ordonnance> {
     @Override
     protected void setInsertParameters(PreparedStatement pstmt, Ordonnance ordonnance) throws SQLException {
         pstmt.setDate(1, java.sql.Date.valueOf(ordonnance.getDate()));
-        pstmt.setInt(2, ordonnance.getMedecin().getId());
-        pstmt.setInt(3, ordonnance.getPatient().getId());
-        pstmt.setInt(4, ordonnance.getSpecialiste() != null ? ordonnance.getSpecialiste().getId() : null);
+        pstmt.setInt(2, ordonnance.getMedecin().getMedId());
+        pstmt.setInt(3, ordonnance.getClient().getId());
+        pstmt.setObject(4, ordonnance.getSpecialiste() != null ? ordonnance.getSpecialiste().getId() : null);
     }
 
     @Override
@@ -33,9 +41,9 @@ public class OrdonnanceDao extends BaseDao<Ordonnance> {
     @Override
     protected void setUpdateParameters(PreparedStatement pstmt, Ordonnance ordonnance) throws SQLException {
         pstmt.setDate(1, java.sql.Date.valueOf(ordonnance.getDate()));
-        pstmt.setInt(2, ordonnance.getMedecin().getUtiId());
-        pstmt.setInt(3, ordonnance.getClient().getCliId());
-        pstmt.setInt(4, ordonnance.getSpeId() != null ? ordonnance.getSpecialiste().getId() : null);
+        pstmt.setInt(2, ordonnance.getMedecin().getId());
+        pstmt.setInt(3, ordonnance.getClient().getId());
+        pstmt.setObject(4, ordonnance.getSpecialiste() != null ? ordonnance.getSpecialiste().getId() : null);
         pstmt.setInt(5, ordonnance.getId());
     }
 
@@ -44,10 +52,9 @@ public class OrdonnanceDao extends BaseDao<Ordonnance> {
         return new Ordonnance(
                 rs.getInt("ord_ID"),
                 rs.getDate("ord_date").toLocalDate(),
-                null, // Implémentation nécessaire pour Medecin
-                null, // Implémentation nécessaire pour Client
-                null  // Implémentation nécessaire pour Specialiste
+                medecinDao.findById(null, rs.getInt("med_ID")),
+                clientDao.findById(null, rs.getInt("cli_ID")),
+                rs.getInt("spe_ID") != 0 ? specialisteDao.findById(null, rs.getInt("spe_ID")) : null
         );
     }
 }
-

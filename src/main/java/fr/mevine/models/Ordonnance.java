@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Ordonnance {
-    private int id;
+    private Integer ordId;
     private LocalDate date; // Utilisation uniforme de LocalDate
     private Medecin medecin;
     private Client client;
@@ -14,8 +14,8 @@ public class Ordonnance {
     public Ordonnance() {
     }
 
-    public Ordonnance(int id, LocalDate date, Medecin medecin, Client client, List<Medicament> medicaments) {
-        this.id = id;
+    public Ordonnance(Integer ordId, LocalDate date, Medecin medecin, Client client, List<Medicament> medicaments) {
+        this.ordId = ordId;
         this.date = date;
         this.medecin = medecin;
         this.client = client;
@@ -23,12 +23,12 @@ public class Ordonnance {
     }
 
     // Getters et Setters
-    public int getId() {
-        return id;
+    public int getOrdId() {
+        return ordId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOrdId(Integer ordId) {
+        this.ordId = ordId;
     }
 
     public LocalDate getDate() {
@@ -65,6 +65,6 @@ public class Ordonnance {
 
     @Override
     public String toString() {
-        return "Ordonnance ID : " + id + ", Client : " + client + ", Médecin : " + medecin;
+        return "Ordonnance ID : " + ordId + ", Client : " + client + ", Médecin : " + medecin;
     }
 }
