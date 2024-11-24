@@ -20,7 +20,7 @@ public class PossederDao extends BaseDao<Posseder> {
     @Override
     protected void setInsertParameters(PreparedStatement pstmt, Posseder posseder) throws SQLException {
         pstmt.setInt(1, posseder.getCliId());
-        pstmt.setInt(2, posseder.getMedicamentId());
+        pstmt.setInt(2, posseder.getMedId());
         pstmt.setInt(3, posseder.getQuantite());
     }
 
@@ -31,9 +31,10 @@ public class PossederDao extends BaseDao<Posseder> {
 
     @Override
     protected void setUpdateParameters(PreparedStatement pstmt, Posseder posseder) throws SQLException {
-        pstmt.setInt(1, posseder.getQuantite());
+
         pstmt.setInt(2, posseder.getCliId());
-        pstmt.setInt(3, posseder.getMedicamentId());
+        pstmt.setInt(3, posseder.getMedId());
+        pstmt.setInt(1, posseder.getQuantite());
     }
 
     @Override

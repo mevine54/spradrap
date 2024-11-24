@@ -10,7 +10,7 @@ public class OrdonnanceView {
     // Afficher les détails d'une ordonnance
     public void afficherOrdonnance(Ordonnance ordonnance) {
         System.out.println("Date de l'ordonnance : " + ordonnance.getDate());
-        System.out.println("Médecin : " + ordonnance.getMedecin().getNom());
+        System.out.println("Médecin : " + ordonnance.getMedecin().getMedNom());
         System.out.println("Patient : " + ordonnance.getClient().getUtiNom());
         System.out.println("Liste des médicaments : ");
         for (Medicament medicament : ordonnance.getMedicaments()) {

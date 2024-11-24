@@ -30,7 +30,7 @@ public class TypeSpecialiteDao extends BaseDao<TypeSpecialite> {
     @Override
     protected void setUpdateParameters(PreparedStatement pstmt, TypeSpecialite typeSpecialite) throws SQLException {
         pstmt.setString(1, typeSpecialite.getNom());
-        pstmt.setInt(2, typeSpecialite.getId());
+        pstmt.setInt(2, typeSpecialite.getTypeSpeId());
     }
 
     @Override

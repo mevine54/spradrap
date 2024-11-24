@@ -14,13 +14,13 @@ public class MutuelleDao extends BaseDao<Mutuelle> {
 
     @Override
     protected String getInsertQuery() {
-        return "INSERT INTO Mutuelle (mut_nom, mut_taux_prise_en_charge) VALUES (?, ?)";
+        return "INSERT INTO Mutuelle (mut_id, mut_nom, mut_taux_prise_en_charge) VALUES (?, ?, ?)";
     }
 
     @Override
     protected void setInsertParameters(PreparedStatement pstmt, Mutuelle mutuelle) throws SQLException {
-        pstmt.setString(1, mutuelle.getNom());
-        pstmt.setDouble(2, mutuelle.getTauxPriseEnCharge());
+        pstmt.setString(1, mutuelle.getMutNom());
+        pstmt.setDouble(2, mutuelle.getMutTauxPriseEnCharge());
     }
 
     @Override
@@ -30,17 +30,19 @@ public class MutuelleDao extends BaseDao<Mutuelle> {
 
     @Override
     protected void setUpdateParameters(PreparedStatement pstmt, Mutuelle mutuelle) throws SQLException {
-        pstmt.setString(1, mutuelle.getNom());
-        pstmt.setDouble(2, mutuelle.getTauxPriseEnCharge());
-        pstmt.setInt(3, mutuelle.getId());
+        pstmt.setString(1, mutuelle.getMutNom());
+        pstmt.setDouble(2, mutuelle.getMutTauxPriseEnCharge());
+        pstmt.setInt(3, mutuelle.getMutId());
     }
 
     @Override
     protected Mutuelle mapResultSetToEntity(ResultSet rs) throws SQLException {
         return new Mutuelle(
                 rs.getInt("mut_ID"),
+                rs.getDouble("mut_taux_prise_en_charge"),
                 rs.getString("mut_nom"),
-                rs.getDouble("mut_taux_prise_en_charge")
+                rs.getInt("adr_id"),
+                rs.getString("mut_tel"),
         );
     }
 }

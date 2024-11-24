@@ -3,23 +3,23 @@ package fr.mevine.models;
 public abstract class Utilisateur {
     private Integer utiId;
     private String utiNom;
-    private String prenom;
+    private String utiPrenom;
     private Adresse adresse;
-    private String telephone;
-    private String email;
+    private String utiTel;
+    private String utiEmail;
 
     // Constructeur vide (si nécessaire)
     public Utilisateur() {
     }
 
     // Constructeur complet
-    public Utilisateur(Integer utiId, String utiNom, String prenom, Adresse adresse, String telephone, String email) {
+    public Utilisateur(Integer utiId, String utiNom, String utiPrenom, Adresse adresse, String utiTel, String utiEmail) {
         this.utiId = utiId;
         this.utiNom = utiNom;
-        this.prenom = prenom;
+        this.utiPrenom = utiPrenom;
         this.adresse = adresse;
-        this.telephone = telephone;
-        this.email = email;
+        this.utiTel = utiTel;
+        this.utiEmail = utiEmail;
     }
 
     // Getters et Setters
@@ -39,12 +39,12 @@ public abstract class Utilisateur {
         this.utiNom = utiNom;
     }
 
-    public String getPrenom() {
-        return prenom;
+    public String getUtiPrenom() {
+        return utiPrenom;
     }
 
     public void setPrenom(String prenom) {
-        this.prenom = prenom;
+        this.utiPrenom = prenom;
     }
 
     public Adresse getAdresse() {
@@ -55,20 +55,20 @@ public abstract class Utilisateur {
         this.adresse = adresse;
     }
 
-    public String getTelephone() {
-        return telephone;
+    public String getUtiTel() {
+        return utiTel;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setTelephone(String utiTel) {
+        this.utiTel = utiTel;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUtiEmail() {
+        return utiEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String utiEmail) {
+        this.utiEmail = utiEmail;
     }
 
     @Override
@@ -76,10 +76,10 @@ public abstract class Utilisateur {
         return "Utilisateur{" +
                 "id=" + utiId +
                 ", nom='" + utiNom + '\'' +
-                ", prenom='" + prenom + '\'' +
+                ", prenom='" + utiPrenom + '\'' +
                 ", adresse=" + adresse +
-                ", telephone='" + telephone + '\'' +
-                ", email='" + email + '\'' +
+                ", telephone='" + utiTel + '\'' +
+                ", email='" + utiEmail + '\'' +
                 '}';
     }
 }

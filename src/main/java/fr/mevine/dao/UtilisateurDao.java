@@ -2,7 +2,7 @@ package fr.mevine.dao;
 
 import fr.mevine.models.Utilisateur;
 import fr.mevine.models.Adresse;
-import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,10 +24,10 @@ public class UtilisateurDao extends BaseDao<Utilisateur> {
     @Override
     protected void setInsertParameters(PreparedStatement pstmt, Utilisateur utilisateur) throws SQLException {
         pstmt.setString(1, utilisateur.getUtiNom());
-        pstmt.setString(2, utilisateur.getPrenom());
-        pstmt.setString(3, utilisateur.getTelephone());
-        pstmt.setString(4, utilisateur.getEmail());
-        pstmt.setInt(5, utilisateur.getAdresse().getId());
+        pstmt.setString(2, utilisateur.getUtiPrenom());
+        pstmt.setString(3, utilisateur.getUtiTel());
+        pstmt.setString(4, utilisateur.getUtiEmail());
+        pstmt.setInt(5, utilisateur.getAdresse().getAdrId());
     }
 
     @Override
@@ -38,10 +38,10 @@ public class UtilisateurDao extends BaseDao<Utilisateur> {
     @Override
     protected void setUpdateParameters(PreparedStatement pstmt, Utilisateur utilisateur) throws SQLException {
         pstmt.setString(1, utilisateur.getUtiNom());
-        pstmt.setString(2, utilisateur.getPrenom());
-        pstmt.setString(3, utilisateur.getTelephone());
-        pstmt.setString(4, utilisateur.getEmail());
-        pstmt.setInt(5, utilisateur.getAdresse().getId());
+        pstmt.setString(2, utilisateur.getUtiPrenom());
+        pstmt.setString(3, utilisateur.getUtiTel());
+        pstmt.setString(4, utilisateur.getUtiEmail());
+        pstmt.setInt(5, utilisateur.getAdresse().getAdrId());
         pstmt.setInt(6, utilisateur.getUtiId());
     }
 
@@ -58,4 +58,3 @@ public class UtilisateurDao extends BaseDao<Utilisateur> {
         );
     }
 }
-
