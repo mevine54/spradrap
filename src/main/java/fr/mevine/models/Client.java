@@ -70,6 +70,6 @@ public class Client extends Utilisateur {
         return super.toString() + ", Numéro de Sécurité Sociale : " + cliNumSecuSocial +
                 ", Date de naissance : " + cliDateNaissance +
                 ", Mutuelle : " + (mutuelle != null ? mutuelle.getMutNom() : "Aucune") +
-                ", Médecin : " + (medecin != null ? medecin.getUtiNom() : "Aucun");
+                ", Médecin : " + (medecin != null ? medecin.getMedId() : "Aucun");
     }
 }

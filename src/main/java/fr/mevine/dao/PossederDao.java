@@ -15,15 +15,30 @@ public class PossederDao extends BaseDao<Posseder> {
     public Adresse create(Posseder obj) {
         String query = "INSERT INTO Posseder (uti_ID, adr_ID) VALUES (?, ?)";
         try (Connection connection = getConnection();
-             PreparedStatement ps = connection.prepareStatement(query)) {
+             PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, obj.getUtiId());
             ps.setInt(2, obj.getAdrId());
             ps.executeUpdate();
-            return true;
+
+            // Récupérer l'objet Adresse inséré
+            String selectQuery = "SELECT * FROM Adresse WHERE adr_ID = ?";
+            try (PreparedStatement selectPs = connection.prepareStatement(selectQuery)) {
+                selectPs.setInt(1, obj.getAdrId());
+                try (ResultSet rs = selectPs.executeQuery()) {
+                    if (rs.next()) {
+                        Adresse adresse = new Adresse();
+                        adresse.setAdrId(rs.getInt("adr_ID"));
+                        adresse.setAdrRue(rs.getString("adr_rue"));
+                        adresse.setAdrCodePostal(rs.getString("adr_code_postal"));
+                        adresse.setAdrVille(rs.getString("adr_ville"));
+                        return adresse;
+                    }
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+        return null; // Retourner null en cas d'échec
     }
 
     @Override
