@@ -3,38 +3,50 @@ package fr.mevine.models;
 import java.time.LocalDate;
 
 public class Client extends Utilisateur {
-    private String numSecuSocial;
-    private LocalDate dateNaissance;
+    private Integer cliId;
+    private String cliNumSecuSocial;
+    private LocalDate cliDateNaissance;
     private Mutuelle mutuelle;
+    private Medecin medecin;
 
     // Constructeurs
     public Client() {
         super();
     }
 
-    public Client(Integer cliId, String nom, String prenom, Adresse adresse, String telephone, String email,
-                  String numSecuSocial, LocalDate dateNaissance, Mutuelle mutuelle) {
-        super(cliId, nom, prenom, adresse, telephone, email); // Appel au constructeur parent
-        this.numSecuSocial = numSecuSocial;
-        this.dateNaissance = dateNaissance;
+    public Client(Integer cliId, String utiNom, String utiPrenom, Adresse adresse, String utiTel, String utiEmail,
+                  String cliNumSecuSocial, LocalDate cliDateNaissance, Mutuelle mutuelle, Medecin medecin) {
+        super(utiNom, utiPrenom, adresse, utiTel, utiEmail); // Appel au constructeur parent
+        this.cliId = cliId;
+        this.cliNumSecuSocial = cliNumSecuSocial;
+        this.cliDateNaissance = cliDateNaissance;
         this.mutuelle = mutuelle;
+        this.medecin = medecin;
     }
 
     // Getters et Setters
-    public String getNumSecuSocial() {
-        return numSecuSocial;
+    public Integer getCliId() {
+        return cliId;
     }
 
-    public void setNumSecuSocial(String numSecuSocial) {
-        this.numSecuSocial = numSecuSocial;
+    public void setCliId(Integer cliId) {
+        this.cliId = cliId;
     }
 
-    public LocalDate getDateNaissance() {
-        return dateNaissance;
+    public String getCliNumSecuSocial() {
+        return cliNumSecuSocial;
     }
 
-    public void setDateNaissance(LocalDate dateNaissance) {
-        this.dateNaissance = dateNaissance;
+    public void setCliNumSecuSocial(String cliNumSecuSocial) {
+        this.cliNumSecuSocial = cliNumSecuSocial;
+    }
+
+    public LocalDate getCliDateNaissance() {
+        return cliDateNaissance;
+    }
+
+    public void setCliDateNaissance(LocalDate cliDateNaissance) {
+        this.cliDateNaissance = cliDateNaissance;
     }
 
     public Mutuelle getMutuelle() {
@@ -45,10 +57,19 @@ public class Client extends Utilisateur {
         this.mutuelle = mutuelle;
     }
 
+    public Medecin getMedecin() {
+        return medecin;
+    }
+
+    public void setMedecin(Medecin medecin) {
+        this.medecin = medecin;
+    }
+
     @Override
     public String toString() {
-        return super.toString() + ", Numéro de Sécurité Sociale : " + numSecuSocial +
-                ", Date de naissance : " + dateNaissance +
-                ", Mutuelle : " + (mutuelle != null ? mutuelle.getMutNom() : "Aucune");
+        return super.toString() + ", Numéro de Sécurité Sociale : " + cliNumSecuSocial +
+                ", Date de naissance : " + cliDateNaissance +
+                ", Mutuelle : " + (mutuelle != null ? mutuelle.getMutNom() : "Aucune") +
+                ", Médecin : " + (medecin != null ? medecin.getUtiNom() : "Aucun");
     }
 }

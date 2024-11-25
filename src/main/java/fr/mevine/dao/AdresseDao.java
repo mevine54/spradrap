@@ -1,51 +1,258 @@
 package fr.mevine.dao;
-
 import fr.mevine.models.Adresse;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static fr.mevine.utilities.Singleton.getConnection;
 
 public class AdresseDao extends BaseDao<Adresse> {
 
     @Override
-    protected String getTableName() {
-        return "Adresse";
+    public Adresse create(Adresse obj) {
+        String sql = "INSERT INTO adresse (adr_rue, adr_code_postal, adr_ville) VALUES (?, ?, ?)";
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = getConnection();
+            connection.setAutoCommit(false);
+
+            statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            statement.setString(1, obj.getAdrRue());
+            statement.setString(2, obj.getAdrCodePostal());
+            statement.setString(3, obj.getAdrVille());
+
+            int affectedRows = statement.executeUpdate();
+            if (affectedRows > 0) {
+                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        obj.setAdrId(generatedKeys.getInt(1));
+                    }
+                }
+            }
+            connection.commit();
+        } catch (SQLException e) {
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                } catch (SQLException rollbackException) {
+                    rollbackException.printStackTrace();
+                }
+            }
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return obj;
     }
 
     @Override
-    protected String getInsertQuery() {
-        return "INSERT INTO Adresse (adr_rue, adr_code_postal, adr_ville) VALUES (?, ?, ?)";
+    public boolean delete(long id) {
+        String sql = "DELETE FROM adresse WHERE adr_id = ?";
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = getConnection();
+            connection.setAutoCommit(false);
+
+            statement = connection.prepareStatement(sql);
+            statement.setLong(1, id);
+
+            int affectedRows = statement.executeUpdate();
+            connection.commit();
+
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                } catch (SQLException rollbackException) {
+                    rollbackException.printStackTrace();
+                }
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override
-    protected void setInsertParameters(PreparedStatement pstmt, Adresse adresse) throws SQLException {
-        pstmt.setString(1, adresse.getRue());
-        pstmt.setString(2, adresse.getCodePostal());
-        pstmt.setString(3, adresse.getVille());
+    public boolean update(Adresse obj) {
+        String sql = "UPDATE adresse SET adr_rue = ?, adr_code_postal = ?, adr_ville = ? WHERE adr_id = ?";
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = getConnection();
+            connection.setAutoCommit(false);
+
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, obj.getAdrRue());
+            statement.setString(2, obj.getAdrCodePostal());
+            statement.setString(3, obj.getAdrVille());
+            statement.setInt(4, obj.getAdrId());
+
+            int affectedRows = statement.executeUpdate();
+            connection.commit();
+
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            if (connection != null) {
+                try {
+                    connection.rollback();
+                } catch (SQLException rollbackException) {
+                    rollbackException.printStackTrace();
+                }
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override
-    protected String getUpdateQuery() {
-        return "UPDATE Adresse SET adr_rue = ?, adr_code_postal = ?, adr_ville = ? WHERE adr_ID = ?";
+    public Adresse getById(int id) {
+        String sql = "SELECT * FROM adresse WHERE adr_id = ?";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        Adresse adresse = null;
+
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                Integer adrId = resultSet.getInt("adr_id");
+                String rue = resultSet.getString("adr_rue");
+                String codePostal = resultSet.getString("adr_code_postal");
+                String ville = resultSet.getString("adr_ville");
+                adresse = new Adresse(adrId, rue, codePostal, ville);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return adresse;
     }
 
     @Override
-    protected void setUpdateParameters(PreparedStatement pstmt, Adresse adresse) throws SQLException {
-        pstmt.setString(1, adresse.getRue());
-        pstmt.setString(2, adresse.getCodePostal());
-        pstmt.setString(3, adresse.getVille());
-        pstmt.setInt(4, adresse.getAdrId());
-    }
+    public List<Adresse> getAll() {
+        String sql = "SELECT * FROM adresse";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        List<Adresse> adresses = new ArrayList<>();
 
-    @Override
-    protected Adresse mapResultSetToEntity(ResultSet rs) throws SQLException {
-        return new Adresse(
-                rs.getInt("adr_ID"),
-                rs.getString("adr_rue"),
-                rs.getString("adr_code_postal"),
-                rs.getString("adr_ville")
-        );
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Integer adrId = resultSet.getInt("adr_id");
+                String rue = resultSet.getString("adr_rue");
+                String codePostal = resultSet.getString("adr_code_postal");
+                String ville = resultSet.getString("adr_ville");
+                Adresse adresse = new Adresse(adrId, rue, codePostal, ville);
+                adresses.add(adresse);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return adresses;
     }
 }
 

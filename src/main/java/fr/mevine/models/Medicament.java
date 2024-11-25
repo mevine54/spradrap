@@ -2,32 +2,33 @@ package fr.mevine.models;
 
 import fr.mevine.enums.TypeMedicament;
 
+import java.time.LocalDate;
+
 public class Medicament {
     private Integer mediId;
     private String mediNom;
     private TypeMedicament typeMedicament;
     private double mediPrix;
-    private int stock;
+    private LocalDate mediDateMiseEnService;
+    private int mediQuantite;
 
-    // Constructeurs
-    public Medicament() {
+    // Constructeur
+    public Medicament(Integer mediId, String mediNom, TypeMedicament typeMedicament, double mediPrix, LocalDate mediDateMiseEnService, int mediQuantite) {
+        setMediId(mediId);
+        setMediNom(mediNom);
+        setTypeMedicament(typeMedicament);
+        setMediPrix(mediPrix);
+        setMediDateMiseEnService(mediDateMiseEnService);
+        setMediQuantite(mediQuantite);
     }
 
-    public Medicament(Integer mediId, String mediNom, TypeMedicament typeMedicament, double mediPrix, int stock) {
-        this.mediId = mediId;
-        this.mediNom = mediNom;
-        this.typeMedicament = typeMedicament;
-        this.mediPrix = mediPrix;
-        this.stock = stock;
-    }
-
-    // Getters et Setters
-    public int getMediId() {
+    // Getters et setters
+    public Integer getMediId() {
         return mediId;
     }
 
-    public void setMediId(int id) {
-        this.mediId = id;
+    public void setMediId(Integer id) {
+        this.mediId = mediId;
     }
 
     public String getMediNom() {
@@ -42,8 +43,8 @@ public class Medicament {
         return typeMedicament;
     }
 
-    public void setCategorie(TypeMedicament categorie) {
-        this.typeMedicament = categorie;
+    public void setTypeMedicament(TypeMedicament typeMedicament) {
+        this.typeMedicament = typeMedicament;
     }
 
     public double getMediPrix() {
@@ -54,17 +55,24 @@ public class Medicament {
         this.mediPrix = mediPrix;
     }
 
-    public int getStock() {
-        return stock;
+    public LocalDate getMediDateMiseEnService() {
+        return mediDateMiseEnService;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setMediDateMiseEnService(LocalDate mediDateMiseEnService) {
+        this.mediDateMiseEnService = mediDateMiseEnService;
+    }
+
+    public int getMediQuantite() {
+        return mediQuantite;
+    }
+
+    public void setMediQuantite(int mediQuantite) {
+        this.mediQuantite = mediQuantite;
     }
 
     @Override
     public String toString() {
-        return mediNom + " (" + typeMedicament + "), Prix : " + mediPrix + " €, Stock : " + stock;
+        return mediNom + " (" + typeMedicament + "), Prix: " + mediPrix + "€, Quantité: " + mediQuantite;
     }
 }
-

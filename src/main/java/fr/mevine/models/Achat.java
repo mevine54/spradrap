@@ -95,11 +95,11 @@ public class Achat {
         return "Achat{" +
                 "achatId=" + achatId +
                 ", dateAchat=" + dateAchat +
-                ", client=" + (client != null ? client.getNom() : "N/A") +
-                ", medicament=" + (medicament != null ? medicament.getNom() : "N/A") +
+                ", client=" + (client != null ? client.getCliId() : "N/A") +
+                ", medicament=" + (medicament != null ? medicament.getMediNom() : "N/A") +
                 ", quantite=" + quantite +
                 ", prixTotal=" + prixTotal +
-                ", ordonnance=" + (ordonnance != null ? ordonnance.getId() : "N/A") +
+                ", ordonnance=" + (ordonnance != null ? ordonnance.getOrdId() : "N/A") +
                 '}';
     }
 }

@@ -1,49 +1,95 @@
 package fr.mevine.dao;
 
+import fr.mevine.models.Adresse;
 import fr.mevine.models.Medicament;
+
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+
+import static fr.mevine.utilities.Singleton.getConnection;
 
 public class MedicamentDao extends BaseDao<Medicament> {
 
-    @Override
-    protected String getTableName() {
-        return "Medicament";
+
+
+        @Override
+        public Medicament create(Medicament obj) {
+            String sql = "INSERT INTO medicament (medi_nom, medi_prix, medi_date_mise_en_service, medi_quantite, TypeMedicamentEnum) VALUES (?, ?, ?, ?, ?)";
+            Connection connection = null;
+            PreparedStatement statement = null;
+
+            try {
+                connection = getConnection();
+                connection.setAutoCommit(false);
+
+
+                statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+
+                statement.setString(1, obj.getMediNom());
+                statement.setDouble(2, obj.getMediPrix());
+                statement.setDate(3, java.sql.Date.valueOf(obj.getMediDateMiseEnService()));
+                statement.setInt(4, obj.getMediQuantite());
+                statement.setString(5, obj.getTypeMedicament().name());
+
+                int affectedRows = statement.executeUpdate();
+                if (affectedRows > 0) {
+                    try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            obj.setMediId(generatedKeys.getInt(1));
+                        }
+                    }
+                }
+                connection.commit();
+            } catch (SQLException e) {
+                if (connection != null) {
+                    try {
+                        connection.rollback();
+                    } catch (SQLException rollbackException) {
+                        rollbackException.printStackTrace();
+                    }
+                }
+                e.printStackTrace();
+            } finally {
+                if (statement != null) {
+                    try {
+                        statement.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (connection != null) {
+                    try {
+                        connection.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return obj;
+            }
+        }
+        return null;
     }
 
     @Override
-    protected String getInsertQuery() {
-        return "INSERT INTO Medicament (med_nom, med_prix, typ_med_ID) VALUES (?, ?, ?)";
+    public boolean delete(long id) {
+        return false;
     }
 
     @Override
-    protected void setInsertParameters(PreparedStatement pstmt, Medicament medicament) throws SQLException {
-        pstmt.setString(1, medicament.getMediNom());
-        pstmt.setDouble(2, medicament.getMediPrix());
-        pstmt.setInt(3, medicament.getMediId());
+    public boolean update(Medicament obj) {
+        return false;
     }
 
     @Override
-    protected String getUpdateQuery() {
-        return "UPDATE Medicament SET med_nom = ?, med_prix = ?, typ_med_ID = ? WHERE med_ID = ?";
+    public Medicament getById(int id) {
+        return null;
     }
 
     @Override
-    protected void setUpdateParameters(PreparedStatement pstmt, Medicament medicament) throws SQLException {
-        pstmt.setString(1, medicament.getMediNom());
-        pstmt.setDouble(2, medicament.getMediPrix());
-        pstmt.setInt(3, medicament.getMediId());
-        pstmt.setInt(4, medicament.getMediId());
+    public List<Medicament> getAll() {
+        return List.of();
     }
 
-    @Override
-    protected Medicament mapResultSetToEntity(ResultSet rs) throws SQLException {
-        return new Medicament(
-                rs.getInt("medi_ID"),
-                rs.getString("medi_nom"),
-                rs.getDouble("medi_prix"),
-                rs.getInt("typ_med_ID")
-        );
-    }
-}

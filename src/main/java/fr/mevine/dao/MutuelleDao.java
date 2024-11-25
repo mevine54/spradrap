@@ -42,7 +42,7 @@ public class MutuelleDao extends BaseDao<Mutuelle> {
                 rs.getDouble("mut_taux_prise_en_charge"),
                 rs.getString("mut_nom"),
                 rs.getInt("adr_id"),
-                rs.getString("mut_tel"),
+                rs.getString("mut_tel")
         );
     }
 }

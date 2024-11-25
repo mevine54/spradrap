@@ -23,7 +23,7 @@ public abstract class Utilisateur {
     }
 
     // Getters et Setters
-    public int getUtiId() {
+    public Integer getUtiId() {
         return utiId;
     }
 
@@ -43,8 +43,8 @@ public abstract class Utilisateur {
         return utiPrenom;
     }
 
-    public void setPrenom(String prenom) {
-        this.utiPrenom = prenom;
+    public void setUtiPrenom(String utiPrenom) {
+        this.utiPrenom = utiPrenom;
     }
 
     public Adresse getAdresse() {
@@ -59,7 +59,7 @@ public abstract class Utilisateur {
         return utiTel;
     }
 
-    public void setTelephone(String utiTel) {
+    public void setUtiTel(String utiTel) {
         this.utiTel = utiTel;
     }
 
@@ -67,7 +67,7 @@ public abstract class Utilisateur {
         return utiEmail;
     }
 
-    public void setEmail(String utiEmail) {
+    public void setUtiEmail(String utiEmail) {
         this.utiEmail = utiEmail;
     }
 

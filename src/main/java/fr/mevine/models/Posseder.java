@@ -1,48 +1,23 @@
 package fr.mevine.models;
 
 public class Posseder {
-    private int ordonnanceId;
-    private int medicamentId;
-    private int quantite;
+    private Integer utiId; // Clé étrangère vers Utilisateur
+    private Integer adrId; // Clé étrangère vers Adresse
 
-    // Constructeurs
-    public Posseder() {
+    // Getters et setters
+    public Integer getUtiId() {
+        return utiId;
     }
 
-    public Posseder(int ordonnanceId, int medicamentId, int quantite) {
-        this.ordonnanceId = ordonnanceId;
-        this.medicamentId = medicamentId;
-        this.quantite = quantite;
+    public void setUtiId(Integer utiId) {
+        this.utiId = utiId;
     }
 
-    // Getters et Setters
-    public int getOrdonnanceId() {
-        return ordonnanceId;
+    public Integer getAdrId() {
+        return adrId;
     }
 
-    public void setOrdonnanceId(int ordonnanceId) {
-        this.ordonnanceId = ordonnanceId;
-    }
-
-    public int getMedicamentId() {
-        return medicamentId;
-    }
-
-    public void setMedicamentId(int medicamentId) {
-        this.medicamentId = medicamentId;
-    }
-
-    public int getQuantite() {
-        return quantite;
-    }
-
-    public void setQuantite(int quantite) {
-        this.quantite = quantite;
-    }
-
-    @Override
-    public String toString() {
-        return "Ordonnance ID : " + ordonnanceId + ", Médicament ID : " + medicamentId + ", Quantité : " + quantite;
+    public void setAdrId(Integer adrId) {
+        this.adrId = adrId;
     }
 }
-

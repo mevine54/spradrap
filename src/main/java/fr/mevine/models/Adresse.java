@@ -2,23 +2,23 @@ package fr.mevine.models;
 
 public class Adresse {
     private Integer adrId;
-    private String rue;
-    private String codePostal;
-    private String ville;
+    private String adrRue;
+    private String adrCodePostal;
+    private String adrVille;
 
     // Constructeurs
     public Adresse() {
     }
 
-    public Adresse(Integer adrId, String rue, String codePostal, String ville) {
+    public Adresse(Integer adrId, String adrRue, String adrCodePostal, String adrVille) {
         this.adrId = adrId;
-        this.rue = rue;
-        this.codePostal = codePostal;
-        this.ville = ville;
+        this.adrRue = adrRue;
+        this.adrCodePostal = adrCodePostal;
+        this.adrVille = adrVille;
     }
 
     // Getters et Setters
-    public int getAdrId() {
+    public Integer getAdrId() {
         return adrId;
     }
 
@@ -26,33 +26,33 @@ public class Adresse {
         this.adrId = adrId;
     }
 
-    public String getRue() {
-        return rue;
+    public String getAdrRue() {
+        return adrRue;
     }
 
-    public void setRue(String rue) {
-        this.rue = rue;
+    public void setAdrRue(String adrRue) {
+        this.adrRue = adrRue;
     }
 
-    public String getCodePostal() {
-        return codePostal;
+    public String getAdrCodePostal() {
+        return adrCodePostal;
     }
 
-    public void setCodePostal(String codePostal) {
-        this.codePostal = codePostal;
+    public void setAdrCodePostal(String adrCodePostal) {
+        this.adrCodePostal = adrCodePostal;
     }
 
-    public String getVille() {
-        return ville;
+    public String getAdrVille() {
+        return adrVille;
     }
 
-    public void setVille(String ville) {
-        this.ville = ville;
+    public void setAdrVille(String adrVille) {
+        this.adrVille = adrVille;
     }
 
     @Override
     public String toString() {
-        return rue + ", " + codePostal + " " + ville;
+        return adrRue + ", " + adrCodePostal + " " + adrVille;
     }
 }
 

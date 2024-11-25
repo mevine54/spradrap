@@ -1,33 +1,52 @@
 package fr.mevine.views;
 
-import fr.mevine.models.Medicament;
-import fr.mevine.models.Ordonnance;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
-import java.util.List;
+public class OrdonnanceView extends JFrame {
+    public OrdonnanceView() {
+        setTitle("Pharmacie Sparadrap - Gestion des Ordonnances");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(800, 600);
+        setLayout(null);
 
-public class OrdonnanceView {
+        JLabel lblOrdonnance = new JLabel("Sélectionner une ordonnance:");
+        lblOrdonnance.setBounds(50, 50, 200, 30);
+        add(lblOrdonnance);
 
-    // Afficher les détails d'une ordonnance
-    public void afficherOrdonnance(Ordonnance ordonnance) {
-        System.out.println("Date de l'ordonnance : " + ordonnance.getDate());
-        System.out.println("Médecin : " + ordonnance.getMedecin().getUtiNom());
-        System.out.println("Patient : " + ordonnance.getClient().getUtiNom());
-        System.out.println("Liste des médicaments : ");
-        if (ordonnance.getMedicaments() != null) {
-            for (Medicament medicament : ordonnance.getMedicaments()) {
-                System.out.println("- " + medicament.getMediNom() + " (Quantité: " + medicament.getStock() + ", Catégorie: " + medicament.getTypeMedicament() + ")");
-            }
-        }
-        if (ordonnance.getSpecialiste() != null) {
-            System.out.println("Spécialiste : " + ordonnance.getSpecialiste().getUtiNom() + " (" + ordonnance.getSpecialiste().getTypeSpecialite() + ")");
-        }
-    }
+        JComboBox<String> cbOrdonnances = new JComboBox<>(new String[]{"Ordonnance #1", "Ordonnance #2"});
+        cbOrdonnances.setBounds(300, 50, 200, 30);
+        add(cbOrdonnances);
 
-    // Afficher une liste d'ordonnances
-    public void afficherListeOrdonnances(List<Ordonnance> ordonnances) {
-        for (Ordonnance ordonnance : ordonnances) {
-            afficherOrdonnance(ordonnance);
-            System.out.println("--------------------");
-        }
+        JButton btnAfficher = new JButton("Afficher les détails");
+        btnAfficher.setBounds(520, 50, 150, 30);
+        btnAfficher.addActionListener(e -> {
+            // Exemple : Ajouter une action pour afficher les détails d'une ordonnance
+            JOptionPane.showMessageDialog(this, "Détails de l'ordonnance sélectionnée");
+        });
+        add(btnAfficher);
+
+        JTable tableMedicaments = new JTable(new DefaultTableModel(
+                new String[]{"Médicament", "Quantité", "Prix Unitaire"}, 0
+        ));
+        JScrollPane scrollPane = new JScrollPane(tableMedicaments);
+        scrollPane.setBounds(50, 100, 700, 300);
+        add(scrollPane);
+
+        JButton btnRetour = new JButton("Retour");
+        btnRetour.setBounds(50, 500, 100, 30);
+        btnRetour.addActionListener(e -> {
+            new DashboardView().setVisible(true);
+            dispose();
+        });
+        add(btnRetour);
+
+        JButton btnAjouter = new JButton("Ajouter une ordonnance");
+        btnAjouter.setBounds(200, 500, 200, 30);
+        btnAjouter.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Ajouter une nouvelle ordonnance - À implémenter");
+        });
+        add(btnAjouter);
     }
 }
+

@@ -3,6 +3,7 @@ package fr.mevine.models;
 import fr.mevine.enums.TypeSpecialite;
 
 public class Specialiste extends Medecin {
+    Integer speId;
     private TypeSpecialite typeSpecialite;
 
     // Constructeurs
@@ -15,6 +16,15 @@ public class Specialiste extends Medecin {
     }
 
     // Getters et Setters
+
+    public Integer getSpeId() {
+        return speId;
+    }
+
+    public void setSpeId(Integer speId) {
+        this.speId = speId;
+    }
+
     public TypeSpecialite getTypeSpecialite() {
         return typeSpecialite;
     }
